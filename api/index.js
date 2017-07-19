@@ -25,7 +25,7 @@ const bodyParser = require("body-parser");
 const errorHandler = require("./modules/error-handler");
 const mongo = require("./modules/mongo");
 const logBody = require("./modules/log-body");
-
+zlib = require('zlib');
 app.use(bodyParser.json());
 
 app.use(logBody);
@@ -46,8 +46,8 @@ app.delete("/books/:id", routesBooks.remove);
 app.use(errorHandler);
 
 mongo.init().then(res => {  
-  res.json(books)     
+   console.log(); 
   app.listen(3000, () => console.log("Example app listening on port 3000!")); 
 }).catch((error) =>{
-    console.log(res.json(error))
+    console.log(error)
 });

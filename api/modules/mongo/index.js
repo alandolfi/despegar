@@ -34,14 +34,21 @@ var options = {
     },
     headers: {
         'User-Agent': 'Request-Promise',
-        'X-ApiKey': '9b5c64a0f58c44fd999df79202b136a4'
+        'X-ApiKey': '9b5c64a0f58c44fd999df79202b136a4',
+        'Accept-Encoding': 'gzip',
+        'Content-Type': 'application/json; charset=UTF-8'
     },
-    json: true // Automatically parses the JSON string in the response 
+    gzip: true // Automatically parses the JSON string in the response 
 };
 
 exports.dbConnector = dbConnector;
 exports.collection = collection;
 
 exports.init = () => {
-  return rp(options)  
+  return rp(options).then(res => {
+    collection("hotels").insert(JSON.stringify(res),(err, records) => {
+      if (err) throw err;
+      console.log("se guardaron los hoteles");
+    });
+  })  
 };
