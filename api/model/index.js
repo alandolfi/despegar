@@ -1,7 +1,7 @@
-const book = require('./book');
 const category = require('./category');
+const hotels = require('./hotels');
 
 module.exports = {
-  book,
-  category
+  category,
+  hotels
 };
