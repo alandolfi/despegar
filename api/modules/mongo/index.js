@@ -50,11 +50,19 @@ const init = () => {
     })
     .then(elementsDB => {
       if (!elementsDB.length) {
+        var jsonObject = JSON.parse(res);
+        let newObjectArray =  [ ];
+        jsonObject.items.forEach(function(element) {
+          let { id ,name , location , stars ,main_picture } =  element;
+          let newObject = { id, name ,location ,stars ,main_picture } ;
+          newObjectArray.push(newObject);
+        }, this);
+        
         console.log(`MongoDB collection (Hoteles) not found, import...`);
-        return col.insert(JSON.parse(res));
+        return col.insert(newObjectArray);
       }
       console.log(`MongoDB collection (Hoteles) found...`);
-      return Promise.resolve();
+      //return Promise.resolve();
     });
   })  
 }

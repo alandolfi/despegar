@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const routesCategories = require("./routes/categories");
 const routesHotels = require("./routes/hotels");
+const routesLikes = require("./routes/likes");
 const bodyParser = require("body-parser");
 const errorHandler = require("./modules/error-handler");
 const mongo = require("./modules/mongo");
@@ -9,8 +9,8 @@ const logBody = require("./modules/log-body");
 
 app.use(bodyParser.json());
 app.use(logBody);
-app.use("/categories", routesCategories);
 app.use("/hotels", routesHotels);
+app.use("/likes", routesLikes);
 app.use(errorHandler);
 
 mongo.init().then(res => {  

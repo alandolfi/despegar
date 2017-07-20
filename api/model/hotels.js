@@ -1,4 +1,3 @@
-const api = require("./api");
 const mongo = require("../modules/mongo");
 const uuid = require("uuid");
 
