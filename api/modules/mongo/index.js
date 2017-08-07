@@ -2,6 +2,7 @@ const mongodb = require("mongodb"), client = mongodb.MongoClient;
 const user = 'malandolfi';//process.env.DBUSER;
 const psw = 'Agml1402';//process.env.DBPSW;
 const connectionString = `mongodb://${user}:${psw}@ds135519.mlab.com:35519/despegar`;
+//const connectionString = `mongodb://db-mongo:27017/despegar`;
 const path = require("path");
 const rp = require('request-promise');
 
@@ -28,7 +29,7 @@ const dbConnector = connectionString => {
   if (promise) {
     return promise;
   }
-  console.log(`Mongo connect: ${connectionString}`);
+  
   promise = client.connect(connectionString).then(function (database) {
     db = database;
     return db;

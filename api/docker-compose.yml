@@ -1,0 +1,14 @@
+version: "2"
+services:
+  db-mongo:
+    image: mongo:3.3
+    container_name: hoteles-db-mongo  
+  server: 
+    build: .
+    container_name: hoteles-server
+    depends_on:
+      - db-mongo
+    volumes:
+      - ./:/app
+    ports:
+      - "4001:4001"

@@ -22,6 +22,5 @@ const update = (req, res, next) => {
 
 router.post("/", insert);
 router.put("/", update);
-router.patch("/:id", update);
 
 module.exports = router;

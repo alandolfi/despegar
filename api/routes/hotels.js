@@ -7,7 +7,7 @@ const createError = require("../modules/create-error");
 router.get("/", (req, res, next) => {
   models.hotels
     .getAll()
-    .then(hotels => res.json(hotels))
+    .then(hotels =>  res.json(hotels))
     .catch(err => next(createError(500, "internal server error", err.message)));
 });
 
