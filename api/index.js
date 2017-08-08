@@ -6,6 +6,8 @@ const logBody = require("./modules/log-body");
 const schema = require('./schema');
 const graphqlHTTP = require('express-graphql');
 const model = require('./model');
+const routesHotels = require("./routes/hotels");
+const routesLikes = require("./routes/likes");
 const app = express();
 
 const queryResolver = {
@@ -14,14 +16,16 @@ const queryResolver = {
 
 app.use(bodyParser.json());
 app.use(logBody);
-app.use(
+app.use("/hotels", routesHotels);
+app.use("/likes", routesLikes);
+/*app.use(
   '/graphql',
   graphqlHTTP({
     schema: schema,
     rootValue: queryResolver,
     graphiql: true
   })
-)
+)*/
 app.use(errorHandler);
 
 mongo.init().then(res => {  
