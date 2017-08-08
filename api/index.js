@@ -16,8 +16,8 @@ const queryResolver = {
 
 app.use(bodyParser.json());
 app.use(logBody);
-app.use("/hotels", routesHotels);
-app.use("/likes", routesLikes);
+app.use("/destinder/hotels", routesHotels);
+app.use("/destinder/likes", routesLikes);
 /*app.use(
   '/graphql',
   graphqlHTTP({
