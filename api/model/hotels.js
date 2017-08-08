@@ -1,15 +1,15 @@
 const mongo = require("../modules/mongo");
 const uuid = require("uuid");
 const itemsByPag = 10;
-exports.getAll = (pag) => {
+exports.getAll = (pag,city) => {
   return mongo.collection("hotels").then(col => {
     if(pag == 1){
-        return col.find().limit(itemsByPag -1).toArray();
+        var result = col.find().limit(100).toArray();
+        return result;
     }
   
-    var skip = (pag * itemsByPag);
-    var totalItems = (pag * itemsByPag) - 1;
-    return col.find().skip(skip).limit(totalItems).toArray();
+    //var skip = (pag * itemsByPag);
+    //return col.find({ 'location.city.id' : city }).skip(skip).limit(itemsByPag).toArray();
   });
 };
 
