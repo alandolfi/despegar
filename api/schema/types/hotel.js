@@ -5,7 +5,8 @@ const {
   GraphQLList
 } = require('graphql');
 
-const model = require('../../model');
+const { pictureType } = require('./picture');
+const { locationType } = require('./location');
 
 const hotelType = new GraphQLObjectType({
   name: 'Hotel',
@@ -23,9 +24,13 @@ const hotelType = new GraphQLObjectType({
       type: GraphQLInt,
       description: 'Cantidad estrella de un hotel.'
     },
-    location: {
-        type: GraphQLString,
-        description : "ubicacion del hotel"
+    main_picture: {
+        type: pictureType,
+        description : "imagenes",
+    },
+    location : {
+      type : locationType,
+      description : "ubicacion del hotel"
     }
   })
 });
