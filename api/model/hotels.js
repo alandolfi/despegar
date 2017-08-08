@@ -1,10 +1,15 @@
 const mongo = require("../modules/mongo");
 const uuid = require("uuid");
-
-exports.getAll = () => {
-  console.log("entre");
+const itemsByPag = 10;
+exports.getAll = (pag) => {
   return mongo.collection("hotels").then(col => {
-    return col.find().toArray();
+    if(pag == 1){
+        return col.find().limit(itemsByPag -1).toArray();
+    }
+  
+    var skip = (pag * itemsByPag);
+    var totalItems = (pag * itemsByPag) - 1;
+    return col.find().skip(skip).limit(totalItems).toArray();
   });
 };
 
