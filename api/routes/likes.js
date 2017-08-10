@@ -6,18 +6,36 @@ const createError = require("../modules/create-error");
 
 
 const insert = (req, res, next) => {
-  models.likes
-    .add(req.body)
-    .then(like => res.status(201).json(like))
-    .catch(err => next(createError(500, "internal server error", err.message)));
+  models.likes.getById(req.body).then(hotel => {
+      if(hotel){
+        hotel.countLike = hotel.countLike + 1;
+        models.likes.update(hotel)
+        .then(like => res.json(like))
+        .catch(err => next(createError(500, "internal server error", err.message)));
+      }else{
+        models.likes
+        .add(req.body)
+        .then(like => res.status(201).json(like))
+        .catch(err => next(createError(500, "internal server error", err.message)));
+      }
+  });
+ 
 };
 
 const update = (req, res, next) => {
-  
-  models.likes
-    .update(req.body)
-    .then(like => res.json(like))
-    .catch(err => next(createError(500, "internal server error", err.message)));
+  console.log("entre2");
+   models.likes.getById(req.body).then(hotel => {
+     if(hotel){
+       hotel.countLike = hotel.countLike - 1;
+       if(hotel.countLike == -1)
+          return;
+
+       models.likes.update(hotel)
+        .then(like => res.json(like))
+        .catch(err => next(createError(500, "internal server error", err.message)));
+     }
+   });
+
 };
 
 router.post("/", insert);
